@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="description" content="MT.com player details" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MT.com - Player Details</title>
+	<link rel="icon" href="icon.gif" type="image/gif"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.0.1/mustache.min.js" type="text/javascript"></script>
+	<script src="js/data.js" type="text/javascript"></script>
+	<script src="js/header.js" type="text/javascript"></script>
+	<script src="js/footer.js" type="text/javascript"></script>
+	<link href="css/all.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+	<div id="menu-header"></div>
+	<div class="page-content">
+		<div id="player-name" class="page-title"></div>
+        <div id="player-detail"></div>
+	</div>
+	<div id="menu-footer"></div>
+	<script>
+		var playerName = getUrlParamValue("item");
+		var playerInfo = players.find(p => p.urlName === playerName);
+		var titleName = `${playerName.replace(/-/g, " ")} (${playerInfo.team.replace(/-/g, " ")})`;
+		document.getElementById("player-name").innerHTML = titleName;
+		var links = [{
+			url: "index.html",
+			name: "Back to Syllabus",
+		},{
+			url: "categories.html",
+			name: "Back to Teams",
+		},{
+			url: `items.html?category=${playerInfo.team}`,
+			name: "Back to Players",
+		}];
+		loadMenu("img/site-logo.png", links);
+		loadFooter("categories.html");
+		loadPlayerDetail(playerName);
+	</script>
+</body>
+</html>
